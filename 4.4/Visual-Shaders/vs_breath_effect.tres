@@ -1,0 +1,66 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://en84iop864ho"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_b3dvb"]
+output_port_for_preview = 0
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_b3dvb"]
+function = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_lvnnk"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_lvnnk"]
+function = 12
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_lvnnk"]
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+// Varyings
+varying float var_rgb_value;
+
+
+
+
+void vertex() {
+	var_rgb_value = 0.0;
+}
+
+void fragment() {
+// Input:7
+	float n_out7p0 = TIME;
+
+
+// FloatFunc:6
+	float n_out6p0 = cos(n_out7p0);
+
+
+// FloatFunc:8
+	float n_out8p0 = abs(n_out6p0);
+
+
+// Output:0
+	COLOR.a = n_out8p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+varyings/rgb_value = "0,0"
+nodes/fragment/0/position = Vector2(1160, -660)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_b3dvb")
+nodes/fragment/6/position = Vector2(360, -620)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_lvnnk")
+nodes/fragment/7/position = Vector2(-120, -620)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatFunc_lvnnk")
+nodes/fragment/8/position = Vector2(780, -620)
+nodes/fragment/9/node = SubResource("VisualShaderNodeIf_lvnnk")
+nodes/fragment/9/position = Vector2(560, -1380)
+nodes/fragment/10/node = SubResource("VisualShaderNodeInput_b3dvb")
+nodes/fragment/10/position = Vector2(-40, -1460)
+nodes/fragment/connections = PackedInt32Array(7, 0, 6, 0, 6, 0, 8, 0, 8, 0, 0, 1, 10, 0, 9, 0)
